@@ -1,0 +1,27 @@
+*, *:before, *:after, html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/** Global mixins */
+@mixin flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+@mixin flex-center-column {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@import "./views/HomeView";
+
+/** Import component styles */
+@import "./components/Login";
+@import "./components/Header";
+@import "./components/HomeCard";

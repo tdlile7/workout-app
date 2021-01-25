@@ -1,0 +1,30 @@
+.Header {
+    width: 100%;
+    height: 7.5%;
+    background: blue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-Icon {
+        @include flex-center;
+        height: 100%;
+        width: 5%;
+        background: grey;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &-Menu {
+        @include flex-center;
+        height: 100%;
+        width: 15%;
+        background: grey;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

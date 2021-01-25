@@ -1,0 +1,14 @@
+.HomeCard {
+    @include flex-center-column;
+    height: 35rem;
+    width: 35rem;
+    margin: 5rem;
+    background: lightgrey;
+    border-radius: 3.5rem;
+
+    &:hover {
+        cursor: pointer;
+        height: 35.5rem;
+        width: 35.25rem;
+    }
+}
