@@ -4,13 +4,13 @@ import { ApolloServer } from "apollo-server-express";
 import { PORT, DB_URI, DATABASE_NAME } from "./utils/env";
 import { schema } from "./schema";
 import * as path from "path";
-import { IMongoDbService } from "./services/IMongoDbService";
-import { MongoDbService } from "./services/MongoDbService";
+import { IGymLockerDb } from "./services/IGymLockerDb";
+import { GymLockerDb } from "./services/GymLockerDb";
 import { MongoClient } from "mongodb";
 import { loadHtmlMiddleware } from "./middleware/loadHtmlMiddleware";
 
-export type GraphQLContext = {
-    mongoDbService: IMongoDbService;
+export type GraphQlContext = {
+    gymLockerDb: IGymLockerDb;
 }
 
 async function main() {
@@ -19,10 +19,10 @@ async function main() {
     await client.connect();
     const db = client.db(DATABASE_NAME);
 
-    const mongoDbService = new MongoDbService(db);
+    const gymLockerDb = new GymLockerDb(db);
 
-    const context: GraphQLContext = {
-        mongoDbService,
+    const context: GraphQlContext = {
+        gymLockerDb,
     };
 
     /**

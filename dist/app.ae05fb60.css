@@ -1,0 +1,138 @@
+*, *:before, *:after, html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+/** Global mixins */
+.HomeView {
+  height: 100vh;
+  width: 100vw;
+}
+.HomeView-Content {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 92.5%;
+}
+
+/** Import component styles */
+.Login {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Login:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #d4d4d4;
+  opacity: 0.35;
+}
+
+.Login-Form {
+  position: relative;
+  height: 80vh;
+  width: 40vw;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Login-Input {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+}
+.Login-Input:first-child {
+  margin-top: 25%;
+  margin-bottom: 5%;
+}
+.Login-Input > span {
+  text-align: center;
+  font-size: 2rem;
+  padding: 0.5rem;
+  color: #154297;
+  font-weight: bold;
+}
+.Login-Input > input {
+  all: unset;
+  background: #e6e4e4;
+  padding: 0.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #4e4e4e;
+}
+
+.Login-SubmitButton {
+  height: 3.5rem;
+  width: 12rem;
+  background: #8cb3fa;
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.Header {
+  width: 100%;
+  height: 7.5%;
+  background: blue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Header-Icon {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 5%;
+  background: grey;
+}
+.Header-Icon:hover {
+  cursor: pointer;
+}
+.Header-Menu {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 15%;
+  background: grey;
+}
+.Header-Menu:hover {
+  cursor: pointer;
+}
+
+.HomeCard {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 35rem;
+  width: 35rem;
+  margin: 5rem;
+  background: lightgrey;
+  border-radius: 3.5rem;
+}
+.HomeCard:hover {
+  cursor: pointer;
+  height: 35.5rem;
+  width: 35.25rem;
+}
+
+
+
+/*# sourceMappingURL=/app.ae05fb60.css.map */

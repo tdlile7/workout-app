@@ -1,18 +1,27 @@
 import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
-import { MongoDbService } from "../services/MongoDbService";
+import { GymLockerDb } from "../services/GymLockerDb";
 
 
-export const User = new GraphQLObjectType<MongoDbService.UserDBO>({
+export const User = new GraphQLObjectType<GymLockerDb.UserDBO>({
     name: "User",
     description: "Single user",
     fields: {
-        name: {
+        id: {
             type: new GraphQLNonNull(GraphQLString),
-            description: "Name of the user",
+            description: "ID of the user.",
+            resolve: ({ _id }) => _id,
+        },
+        firstName: {
+            type: new GraphQLNonNull(GraphQLString),
+            description: "First name of the user.",
+        },
+        lastName: {
+            type: new GraphQLNonNull(GraphQLString),
+            description: "Last name of the user.",
         },
         email: {
             type: GraphQLString,
-            description: "Email of the user",
+            description: "Email of the user.",
         },
     }
 });

@@ -1,30 +1,49 @@
 import { GraphQLError, GraphQLFieldConfig, GraphQLNonNull, GraphQLString } from "graphql";
-import { GraphQLContext } from "../..";
+import { GraphQlContext } from "../..";
+import { User } from "../User";
 
 type Args = {
-    name: string;
+    /** First name of the new user. */
+    firstName: string;
+    /** Last name of the new user. */
+    lastName: string;
+    /** Password of the new user. */
+    password: string;
+    /** Email of the first user. */
     email?: string;
 }
 
-export const createUser: GraphQLFieldConfig<null, GraphQLContext, Args> = {
-    type: new GraphQLNonNull(GraphQLString),
-    description: "Creates a new game from a name, host name, and game config variables.",
+export const createUser: GraphQLFieldConfig<null, GraphQlContext, Args> = {
+    type: new GraphQLNonNull(User),
+    description: "Creates a new user.",
     args: {
-        name: {
+        firstName: {
             type: new GraphQLNonNull(GraphQLString),
-            description: "The ID of the game to add this player to.",
+            description: "The first name of the new user.",
+        },
+        lastName: {
+            type: new GraphQLNonNull(GraphQLString),
+            description: "The last name of the new user.",
         },
         email: {
             type: GraphQLString,
-            description: "The ID of the player if already existing.",
+            description: "The email of the new user.",
+        },
+        password: {
+            type: new GraphQLNonNull(GraphQLString),
+            description: "The password of the new user.",
         },
     },
-    async resolve(_, { name, email }, { mongoDbService }) {
+    async resolve(_, { firstName, lastName, email, password }, { gymLockerDb }) {
         try {
-            await mongoDbService.createUser(name, email);
-            return "User was saved into the database successfully!";
+            return await gymLockerDb.createUser({
+                firstName,
+                lastName,
+                password,
+                email
+            });
         } catch (err) {
-            throw new GraphQLError(`Error occurred while adding player to game: ${err}`);
+            throw new GraphQLError(`Error occurred while storing new user into the database: ${err}`);
         }
     },
 };
