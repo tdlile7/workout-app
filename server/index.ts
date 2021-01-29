@@ -1,45 +1,55 @@
 import express = require("express");
 import cors = require("cors");
 import { ApolloServer } from "apollo-server-express";
-import { PORT } from "./utils/env";
+import { PORT, DB_URI, DATABASE_NAME } from "./utils/env";
 import { schema } from "./schema";
 import * as path from "path";
-import * as fs from "fs";
+import { IMongoDbService } from "./services/IMongoDbService";
+import { MongoDbService } from "./services/MongoDbService";
+import { MongoClient } from "mongodb";
+import { loadHtmlMiddleware } from "./middleware/loadHtmlMiddleware";
 
-/**
- * Create the Express application instance.
- */
-const app = express();
+export type GraphQLContext = {
+    mongoDbService: IMongoDbService;
+}
 
-app.use(cors());
+async function main() {
+    /** Connect to mongodb cluster. */
+    const client = new MongoClient(DB_URI, { useUnifiedTopology: true });
+    await client.connect();
+    const db = client.db(DATABASE_NAME);
 
-/** Set up graphql endpoint */
-const server = new ApolloServer({
-    schema,
-    playground: true,
-});
+    const mongoDbService = new MongoDbService(db);
 
-server.applyMiddleware({ app });
+    const context: GraphQLContext = {
+        mongoDbService,
+    };
 
-app.use(express.static(path.resolve(__dirname, "../public")));
+    /**
+     * Create the Express application instance.
+     */
+    const app = express();
 
-app.use((req, res) => {
-    const filePath = path.resolve(__dirname + "/../dist/index.html");
-    let html = fs.readFileSync(filePath, "utf8");
+    app.use(cors());
 
-    /** API url from which the client will connect. */
-    const apiUrl = `${req.protocol}://${req.hostname}${PORT ? `:${PORT}` : ""}`;
+    /** Set up graphql endpoint */
+    const server = new ApolloServer({
+        schema,
+        playground: true,
+        context,
+    });
 
-    /** Inject environment variables into html that will be sent back to the client. */
-    html = html.replace(
-        "<var></var>",
-        `<script>var API_URL = "${apiUrl}";</script>`,
-    );
+    server.applyMiddleware({ app });
 
-    res.type("html").send(html);
-});
+    app.use(express.static(path.resolve(__dirname, "../public")));
 
-/** Start up server */
-app.listen(PORT, () => {
-    console.log(`Server starting on PORT: ${PORT}`);
-})
+    /** Load html template from  */
+    app.use(loadHtmlMiddleware);
+
+    /** Start up server */
+    app.listen(PORT, () => {
+        console.log(`Server starting on PORT: ${PORT}`);
+    })
+}
+
+main();

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { Header } from "../components/Header";
-import { HomeCard } from "../components/HomeCard";
+import { Header } from "../components/Header/Header";
+import { HomeCard } from "../components/HomeCard/HomeCard";
 
 type Props = RouteComponentProps & {};
 

@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/client";
 import React, { ChangeEvent, FC, useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { testResponse, TEST_QUERY } from "../api/queries/hello";
-import { login } from "../utils/login";
+import { testResponse, TEST_QUERY } from "../../api/queries/hello";
+import { login } from "../../utils/login";
 
 type Props = RouteComponentProps & {};
 

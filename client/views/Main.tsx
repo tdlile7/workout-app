@@ -6,7 +6,7 @@ import {
     Route,
 } from "react-router-dom";
 import { client } from "../api/client";
-import { Login } from "../components/Login";
+import { Login } from "../components/Login/Login";
 import { HomeView } from "./HomeView";
 
 
