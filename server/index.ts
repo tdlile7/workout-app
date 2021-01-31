@@ -8,6 +8,8 @@ import { IGymLockerDb } from "./services/IGymLockerDb";
 import { GymLockerDb } from "./services/GymLockerDb";
 import { MongoClient } from "mongodb";
 import { loadHtmlMiddleware } from "./middleware/loadHtmlMiddleware";
+import { INutritionApi } from "./services/INutritionApi";
+import { NutritionApi } from "./services/NutritionApi";
 
 export type GraphQlContext = {
     gymLockerDb: IGymLockerDb;
@@ -20,6 +22,8 @@ async function main() {
     const db = client.db(DATABASE_NAME);
 
     const gymLockerDb = new GymLockerDb(db);
+
+    const nutritionApi = new NutritionApi();
 
     const context: GraphQlContext = {
         gymLockerDb,

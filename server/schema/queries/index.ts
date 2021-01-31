@@ -1,14 +1,10 @@
-import { GraphQLObjectType, GraphQLString } from "graphql";
+import { GraphQLObjectType } from "graphql";
+import { getNutrition } from "./nutrition";
 
 export const query = new GraphQLObjectType({
     name: "Query",
     description: "Parent query node",
     fields: {
-        hello: {
-            type: GraphQLString,
-            resolve: () => {
-                return "Hello World"
-            }
-        },
+        getNutrition,
     }
 });

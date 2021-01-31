@@ -1,6 +1,6 @@
 import { GraphQLError, GraphQLFieldConfig, GraphQLNonNull, GraphQLString } from "graphql";
 import { GraphQlContext } from "../..";
-import { User } from "../User";
+import { User } from "../types/User";
 
 type Args = {
     /** First name of the new user. */
